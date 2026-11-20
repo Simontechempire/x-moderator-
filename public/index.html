@@ -4,191 +4,68 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>X-MODERATOR-BOT</title>
-
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-body {
-  min-height: 100vh;
-  background: #080b12;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.container {
-  width: 100%;
-  max-width: 420px;
-  background: #111827;
-  border: 1px solid #273449;
-  border-radius: 20px;
-  padding: 27px;
-  box-shadow: 0 15px 45px #0008;
-}
-
-.logo {
-  text-align: center;
-  font-size: 48px;
-  margin-bottom: 12px;
-}
-
-h1 {
-  text-align: center;
-  font-size: 23px;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  color: #9ca3af;
-  text-align: center;
-  font-size: 13px;
-  margin: 10px 0 25px;
-}
-
-.status {
-  padding: 12px;
-  border-radius: 10px;
-  background: #1c2939;
-  text-align: center;
-  color: #38d9a9;
-  margin-bottom: 20px;
-  font-size: 13px;
-}
-
-label {
-  font-size: 13px;
-  color: #cbd5e1;
-}
-
-input {
-  width: 100%;
-  padding: 15px;
-  margin: 10px 0 15px;
-  background: #080e19;
-  color: white;
-  border: 1px solid #34445d;
-  border-radius: 10px;
-  outline: none;
-  font-size: 15px;
-}
-
-input:focus {
-  border-color: #38bdf8;
-}
-
-button {
-  width: 100%;
-  padding: 15px;
-  background: linear-gradient(120deg,#087cf0,#06b6d4);
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-weight: bold;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: .5;
-  cursor: not-allowed;
-}
-
-.result {
-  display: none;
-  margin-top: 20px;
-  background: #081a20;
-  border: 1px solid #087c70;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-}
-
-.code {
-  font-size: 28px;
-  font-weight: bold;
-  letter-spacing: 5px;
-  color: #38d9a9;
-  margin: 15px 0;
-  overflow-wrap: anywhere;
-}
-
-.message {
-  color: #cbd5e1;
-  font-size: 13px;
-  margin-top: 15px;
-  line-height: 1.6;
-}
-
-.footer {
-  text-align: center;
-  color: #64748b;
-  font-size: 11px;
-  margin-top: 25px;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+body { min-height: 100vh; background: #080b12; color: white; display: flex; justify-content: center; align-items: center; padding: 20px; }
+.container { width: 100%; max-width: 420px; background: #111827; border: 1px solid #273449; border-radius: 20px; padding: 27px; box-shadow: 0 15px 45px #0008; }
+.logo { text-align: center; font-size: 48px; margin-bottom: 12px; }
+h1 { text-align: center; font-size: 23px; letter-spacing: 1px; }
+.subtitle { color: #9ca3af; text-align: center; font-size: 13px; margin: 10px 0 25px; }
+.status { padding: 12px; border-radius: 10px; background: #1c2939; text-align: center; color: #38d9a9; margin-bottom: 20px; font-size: 13px; }
+.status.connected { background: #052e22; color: #34d399; border: 1px solid #059669; }
+.status.connecting { background: #2e1a05; color: #fbbf24; border: 1px solid #f59e0b; }
+.status.disconnected { background: #1c2939; color: #f87171; }
+label { font-size: 13px; color: #cbd5e1; }
+input { width: 100%; padding: 15px; margin: 10px 0 15px; background: #080e19; color: white; border: 1px solid #34445d; border-radius: 10px; outline: none; font-size: 15px; }
+input:focus { border-color: #38bdf8; }
+button { width: 100%; padding: 15px; background: linear-gradient(120deg,#087cf0,#06b6d4); border: none; border-radius: 10px; color: white; font-weight: bold; font-size: 15px; cursor: pointer; margin-bottom: 10px; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+.btn-danger { background: linear-gradient(120deg,#dc2626,#ef4444); }
+.btn-secondary { background: #1f2937; border: 1px solid #374151; }
+.result { display: none; margin-top: 20px; background: #081a20; border: 1px solid #087c70; border-radius: 12px; padding: 20px; text-align: center; }
+.code { font-size: 28px; font-weight: bold; letter-spacing: 5px; color: #38d9a9; margin: 15px 0; overflow-wrap: anywhere; }
+.message { color: #cbd5e1; font-size: 13px; margin-top: 15px; line-height: 1.6; text-align:center; }
+.message.error { color: #f87171; }
+.message.success { color: #34d399; }
+.footer { text-align: center; color: #64748b; font-size: 11px; margin-top: 25px; }
+.steps { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 14px; margin-top: 15px; font-size: 12px; line-height: 1.7; color: #94a3b8; text-align: left; }
 </style>
 </head>
-
 <body>
-
 <div class="container">
-
   <div class="logo">🛡️</div>
-
   <h1>X-MODERATOR-BOT</h1>
-
-  <p class="subtitle">
-    WhatsApp Group Moderator Connection Panel
-  </p>
-
-  <div class="status" id="status">
-    ● Checking server...
-  </div>
+  <p class="subtitle">WhatsApp Group Moderator Connection Panel</p>
+  <div class="status disconnected" id="status">● Checking server...</div>
 
   <label>WhatsApp Number</label>
+  <input id="number" type="tel" placeholder="234XXXXXXXXXX" autocomplete="tel" value="2348071569915">
 
-  <input
-    id="number"
-    type="tel"
-    placeholder="234XXXXXXXXXX"
-    autocomplete="tel"
-  >
-
-  <button id="connect" onclick="connectBot()">
-    GENERATE PAIRING CODE
-  </button>
+  <button id="connect" onclick="connectBot()">GENERATE PAIRING CODE</button>
+  <button id="disconnectBtn" class="btn-danger" onclick="disconnectBot()" style="display:none;">🔴 FORCE DISCONNECT / LOGOUT</button>
+  <button id="resetBtn" class="btn-secondary" onclick="resetBot()">♻️ RESET BOT (Clear Session)</button>
 
   <div class="result" id="result">
-
     <p>YOUR PAIRING CODE</p>
-
     <div class="code" id="code"></div>
-
-    <button onclick="copyCode()">
-      COPY CODE
-    </button>
-
-    <p class="message">
-      Open WhatsApp on your phone.<br>
-      Go to Linked Devices → Link a Device →
-      Link with phone number instead.<br>
-      Enter the code displayed above.
-    </p>
-
+    <button onclick="copyCode()">COPY CODE</button>
+    <p class="message">Open WhatsApp on your phone.<br>Go to Linked Devices → Link a Device →<br>Link with phone number instead.<br>Enter the code displayed above.</p>
   </div>
 
   <p class="message" id="message"></p>
 
-  <div class="footer">
-    POWERED BY SIMON TECH INC
+  <div class="steps">
+    <b style="color:white;">How to Link:</b><br>
+    1. Enter number + Generate Code<br>
+    2. Open WhatsApp > Settings > Linked Devices<br>
+    3. Tap Link a Device > Link with phone number<br>
+    4. Enter code above<br><br>
+    <b style="color:#f87171;">If stuck on "already connected":</b><br>
+    Click FORCE DISCONNECT, wait 3 secs, Generate again.<br>
+    Or click RESET BOT to clear old session.
   </div>
 
+  <div class="footer">POWERED BY SIMON TECH INC</div>
 </div>
 
 <script>
@@ -196,15 +73,30 @@ async function checkStatus() {
   try {
     const response = await fetch("/api/status");
     const data = await response.json();
+    const el = document.getElementById("status");
+    const discBtn = document.getElementById("disconnectBtn");
 
-    document.getElementById("status").textContent =
-      data.connected
-        ? "● WhatsApp Connected"
-        : "● Waiting for connection";
-
+    if (data.connected) {
+      el.textContent = "● WhatsApp Connected ✅ " + (data.user || "");
+      el.className = "status connected";
+      discBtn.style.display = "block";
+      document.getElementById("result").style.display = "none";
+    } else if (data.status && data.status.toLowerCase().includes("connect")) {
+      el.textContent = "● Connecting... Waiting for code";
+      el.className = "status connecting";
+      discBtn.style.display = "block";
+      // If server already has code, show it
+      if (data.pairingCode) {
+        document.getElementById("code").textContent = data.pairingCode;
+        document.getElementById("result").style.display = "block";
+      }
+    } else {
+      el.textContent = "● Waiting for connection";
+      el.className = "status disconnected";
+      discBtn.style.display = "none";
+    }
   } catch {
-    document.getElementById("status").textContent =
-      "● Server unavailable";
+    document.getElementById("status").textContent = "● Server unavailable";
   }
 }
 
@@ -216,6 +108,7 @@ async function connectBot() {
 
   if (!/^\d{10,15}$/.test(number)) {
     message.textContent = "Enter a valid number with country code, without +.";
+    message.className = "message error";
     return;
   }
 
@@ -227,50 +120,80 @@ async function connectBot() {
   try {
     const response = await fetch("/pair", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ number })
     });
-
     const data = await response.json();
 
     if (!response.ok) {
       throw new Error(data.message);
     }
 
+    // FIX: If no pairing code but success = already registered / connected
     if (!data.pairingCode) {
-      throw new Error("No pairing code returned.");
+      message.textContent = "✅ " + (data.message || "Bot connected! No code needed - already registered.");
+      message.className = "message success";
+      checkStatus();
+      return;
     }
 
-    document.getElementById("code").textContent =
-      data.pairingCode;
-
+    document.getElementById("code").textContent = data.pairingCode;
     result.style.display = "block";
-
     message.textContent = data.message;
+    message.className = "message success";
 
   } catch (error) {
     message.textContent = "❌ " + error.message;
-
+    message.className = "message error";
+    // If already connected, show disconnect button
+    if (error.message.toLowerCase().includes("already connected")) {
+      document.getElementById("disconnectBtn").style.display = "block";
+      message.textContent += " Click FORCE DISCONNECT below, then try again.";
+    }
   } finally {
     button.disabled = false;
     button.textContent = "GENERATE PAIRING CODE";
   }
 }
 
+async function disconnectBot() {
+  if(!confirm("Disconnect bot and clear session? You will need to pair again.")) return;
+  const msg = document.getElementById("message");
+  msg.textContent = "Disconnecting...";
+  try {
+    const res = await fetch("/logout", { method: "POST" });
+    const data = await res.json();
+    msg.textContent = "✅ " + data.message;
+    msg.className = "message success";
+    document.getElementById("result").style.display = "none";
+    checkStatus();
+  } catch(e){ msg.textContent = "❌ " + e.message; }
+}
+
+async function resetBot() {
+  if(!confirm("Reset bot? This will delete session and allow fresh pairing.")) return;
+  const msg = document.getElementById("message");
+  msg.textContent = "Resetting...";
+  try {
+    const res = await fetch("/reset", { method: "POST" });
+    const data = await res.json();
+    msg.textContent = "✅ " + data.message;
+    msg.className = "message success";
+    document.getElementById("result").style.display = "none";
+    checkStatus();
+  } catch(e){ msg.textContent = "❌ " + e.message; }
+}
+
 function copyCode() {
   const code = document.getElementById("code").textContent;
-
   navigator.clipboard.writeText(code).then(() => {
-    document.getElementById("message").textContent =
-      "✅ Pairing code copied!";
+    document.getElementById("message").textContent = "✅ Pairing code copied!";
+    document.getElementById("message").className = "message success";
   });
 }
 
 checkStatus();
-setInterval(checkStatus, 10000);
+setInterval(checkStatus, 3000);
 </script>
-
 </body>
-  </html>
+</html>
